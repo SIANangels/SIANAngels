@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIAN Angels — Backing Bold Ideas. Building the Future.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0e;
+    --paper: #f8f5f0;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --rust: #8b3a2f;
+    --cream: #ede8df;
+    --muted: #7a7268;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(139,58,47,0.10) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 300;
+    color: var(--paper);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s ease forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-tagline {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(248,245,240,0.55);
+    letter-spacing: 0.08em;
+    max-width: 440px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s ease forwards;
+  }
+
+  .hero-cta {
+    margin-top: 4rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s ease forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.85rem 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn:hover { background: var(--gold); color: var(--ink); }
+
+  .scroll-line {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s ease forwards;
+  }
+  .scroll-line span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(248,245,240,0.3);
+  }
+  .scroll-line::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 3rem;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse-line 2s 1.5s infinite;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 7rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .full-bleed {
+    max-width: 100%;
+    padding: 7rem 0;
+  }
+  .full-bleed .inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--rust); }
+
+  .divider {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold);
+    margin: 2rem 0;
+  }
+
+  /* ── WHO WE ARE ── */
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 5rem;
+    margin-top: 4rem;
+  }
+
+  .who-item {
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--cream);
+    transition: border-color 0.3s;
+  }
+  .who-item:hover { border-color: var(--gold); }
+
+  .who-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+  .who-item p { font-size: 0.875rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+  /* ── NICHE ── */
+  .niche-bg {
+    background: var(--ink);
+  }
+
+  .niche-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .niche-card {
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .niche-card:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+
+  .niche-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .niche-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--paper);
+    margin-bottom: 0.6rem;
+  }
+  .niche-card p { font-size: 0.78rem; color: rgba(248,245,240,0.45); line-height: 1.7; font-weight: 300; }
+  .niche-bg .section-title { color: var(--paper); }
+  .niche-bg .section-label { }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 4rem;
+  }
+
+  .philosophy-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--rust);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+  }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    min-width: 2rem;
+    padding-top: 0.1rem;
+  }
+
+  .pillar h4 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .pillar p { font-size: 0.825rem; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+  /* ── WHY SIAN ── */
+  .why-sian-bg { background: var(--cream); }
+
+  .differentiators {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+
+  .diff-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .diff-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .diff-item h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .diff-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+  /* ── FOR STARTUPS ── */
+  .for-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .for-sticky { position: sticky; top: 5rem; }
+
+  .feature-list { margin-top: 2.5rem; }
+
+  .feature {
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--cream);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: transform 0.2s;
+  }
+  .feature:hover { transform: translateX(4px); }
+  .feature:first-child { border-top: 1px solid var(--cream); }
+
+  .feature-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .feature h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.35rem; }
+  .feature p { font-size: 0.82rem; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+  /* ── INVESTORS ── */
+  .investors-bg { background: var(--ink); }
+  .investors-bg .section-title { color: var(--paper); }
+
+  .investor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .investor-card {
+    padding: 2.5rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    transition: border-color 0.3s;
+  }
+  .investor-card:hover { border-color: var(--gold); }
+
+  .investor-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--paper);
+    margin-bottom: 0.7rem;
+  }
+  .investor-card p { font-size: 0.83rem; color: rgba(248,245,240,0.5); line-height: 1.8; font-weight: 300; }
+
+  /* ── EVENTS ── */
+  .events-list { margin-top: 4rem; }
+
+  .event-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--cream);
+    align-items: start;
+    transition: transform 0.2s;
+  }
+  .event-item:first-child { border-top: 1px solid var(--cream); }
+  .event-item:hover { transform: translateX(6px); }
+
+  .event-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.3rem;
+    font-weight: 500;
+  }
+
+  .event-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+  .event-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+  /* ── CONTACT ── */
+  .contact-bg {
+    background: var(--ink);
+    padding: 8rem 2rem;
+    text-align: center;
+  }
+  .contact-bg .section-title { color: var(--paper); margin-bottom: 1.5rem; }
+  .contact-bg .section-label { justify-content: center; display: flex; }
+
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .contact-tagline {
+    font-size: 0.9rem;
+    color: rgba(248,245,240,0.45);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 4rem;
+  }
+
+  .contact-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    text-align: left;
+    margin-bottom: 4rem;
+  }
+
+  .contact-block h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .contact-block p, .contact-block a {
+    font-size: 0.85rem;
+    color: rgba(248,245,240,0.55);
+    line-height: 1.9;
+    font-weight: 300;
+    text-decoration: none;
+    display: block;
+  }
+  .contact-block a:hover { color: var(--gold); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(15,15,14,0.92); backdrop-filter: blur(8px); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--paper);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(248,245,240,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse-line {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .who-grid { grid-template-columns: 1fr; }
+    .niche-grid { grid-template-columns: repeat(2, 1fr); }
+    .philosophy-cols { grid-template-columns: 1fr; gap: 2rem; }
+    .differentiators { grid-template-columns: 1fr; }
+    .for-section { grid-template-columns: 1fr; }
+    .for-sticky { position: static; }
+    .investor-grid { grid-template-columns: 1fr; }
+    .event-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .contact-details { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 0.72rem; color: rgba(248,245,240,0.25); letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">SIAN Angels</a>
+  <ul class="nav-links">
+    <li><a href="#who">About</a></li>
+    <li><a href="#niche">Sectors</a></li>
+    <li><a href="#startups">Startups</a></li>
+    <li><a href="#investors">Investors</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <p class="hero-eyebrow">SIAN Angels and Innovation Hub Pvt. Ltd.</p>
+  <h1 class="hero-title">Backing <em>Bold</em><br>Ideas.<br>Building the<br>Future.</h1>
+  <p class="hero-tagline">Connecting visionary founders with strategic investors who provide capital, credibility, and catalytic connections.</p>
+  <div class="hero-cta">
+    <a href="#who" class="btn">Discover SIAN</a>
+  </div>
+  <div class="scroll-line"><span>Scroll</span></div>
+</div>
+
+<!-- WHO WE ARE -->
+<section id="who">
+  <div class="reveal">
+    <p class="section-label">Who We Are</p>
+    <h2 class="section-title">A Collective of Investors Fuelling<br>South India's <em>Next Big Ventures</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="who-grid reveal">
+
+    <div class="who-item">
+      <h3>Co-Creating Success</h3>
+      <p>SIAN goes beyond funding — we partner with founders to transform early-stage startups into scalable, sustainable ventures.</p>
+    </div>
+    <div class="who-item">
+      <h3>Powering the Next Generation</h3>
+      <p>Accelerating South India's innovation ecosystem by fostering deep engagement across high-impact sectors.</p>
+    </div>
+    <div class="who-item">
+      <h3>Global Ambition, Regional Relevance</h3>
+      <p>Headquartered in Bengaluru, SIAN backs startups that are sellable, scalable, and fundable — with the potential to impact global markets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NICHE / SECTORS -->
+<div class="full-bleed niche-bg" id="niche">
+  <div class="inner">
+    <div class="reveal">
+      <p class="section-label">Our Niche</p>
+      <h2 class="section-title" style="color:var(--paper)">Where <em style="color:var(--gold)">Innovation</em><br>Meets Scale</h2>
+      <div class="divider"></div>
+      <p style="font-size:0.875rem;color:rgba(248,245,240,0.45);max-width:500px;line-height:1.85;font-weight:300;">SIAN targets high-growth sectors where technology, talent, and capital can converge to create lasting impact.</p>
+    </div>
+    <div class="niche-grid reveal">
+      <div class="niche-card">
+        <span class="niche-icon">🌾</span>
+        <h3>Agriculture</h3>
+        <p>Next-generation agri-tech and value chain transformation ventures improving efficiency and farmer outcomes.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">⚡</span>
+        <h3>Deep Tech</h3>
+        <p>AI, space tech, IoT, and core IP-led startups redefining technological frontiers.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">💳</span>
+        <h3>FinTech</h3>
+        <p>Enabling financial inclusion and digital infrastructure through scalable fintech innovations.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">🏥</span>
+        <h3>Healthcare</h3>
+        <p>Medtech, diagnostics, biotech, and wellness platforms enhancing healthcare accessibility.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">🌿</span>
+        <h3>Sustainability</h3>
+        <p>Climate tech, clean energy, and the regenerative economy driving measurable impact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVESTMENT PHILOSOPHY -->
+<section id="philosophy">
+  <div class="reveal">
+    <p class="section-label">Investment Philosophy</p>
+    <h2 class="section-title"><em>Sellable.</em> Scalable.<br>Fundable.</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="philosophy-cols reveal">
+    <div>
+      <p class="philosophy-intro">"We back founders defined by resilience, integrity, and the relentless drive to execute."</p>
+      <p style="font-size:0.875rem;color:var(--muted);line-height:1.85;font-weight:300;">Our investment decisions are grounded in strong fundamentals, validated market fit, and the conviction that technology-driven ventures can achieve exponential, global-scale growth.</p>
+    </div>
+    <div>
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <div>
+          <h4>Founder-First</h4>
+          <p>Resilience, integrity, and execution capability — the hallmarks of founders we back.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <div>
+          <h4>Strong Unit Economics</h4>
+          <p>Validated market fit and robust fundamentals drive our portfolio selection.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <div>
+          <h4>Scalable Technology</h4>
+          <p>Ventures leveraging technology to achieve exponential growth across markets.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">04</span>
+        <div>
+          <h4>Global Outlook</h4>
+          <p>Regionally rooted ventures with the potential for global relevance and impact.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SIAN -->
+<div class="full-bleed why-sian-bg" id="why">
+  <div class="inner">
+    <div class="reveal">
+      <p class="section-label">Why SIAN?</p>
+      <h2 class="section-title">What Sets<br><em>Us Apart</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="differentiators reveal">
+      <div class="diff-item">
+        <span class="diff-num">1</span>
+        <div>
+          <h3>Sector-Focused, Founder-Centric</h3>
+          <p>Customised, sector-specific mentorship and growth pathways — never a generic programme.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">2</span>
+        <div>
+          <h3>End-to-End Engagement</h3>
+          <p>Our commitment extends from the first pitch to sustainable scale, ensuring long-term continuity.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">3</span>
+        <div>
+          <h3>Deep Regional Reach</h3>
+          <p>Strong presence in Tier-2 and Tier-3 innovation hubs, tapping into emerging entrepreneurial talent.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">4</span>
+        <div>
+          <h3>High-Integrity Pipeline</h3>
+          <p>Quality over quantity — curating investor-ready startups built for impact and scale.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOR STARTUPS -->
+<section id="startups">
+  <div class="for-section">
+    <div class="for-sticky reveal">
+      <p class="section-label">For Startups</p>
+      <h2 class="section-title">Your Vision,<br>Backed by<br><em>Experience</em></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.875rem;color:var(--muted);line-height:1.85;font-weight:300;">From the first pitch to the first million — SIAN walks with you at every step of the journey.</p>
+      <a href="https://forms.gle/NzsDfdDiWXeMKkg98" target="_blank" rel="noopener noreferrer" class="btn" style="margin-top:2rem;display:inline-block;">Apply Now</a>
+    </div>
+    <div>
+      <div class="feature-list reveal">
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <div>
+            <h4>Investor Access</h4>
+            <p>Connect directly with sector-aligned angels and venture partners who understand your domain and growth needs.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🧭</div>
+          <div>
+            <h4>Strategic Guidance</h4>
+            <p>Expert mentorship on product-market fit, go-to-market strategy, and capital readiness.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✨</div>
+          <div>
+            <h4>Visibility & Credibility</h4>
+            <p>Build brand equity within SIAN's trusted network of investors and ecosystem partners.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🤝</div>
+          <div>
+            <h4>Hands-On Mentorship</h4>
+            <p>Guidance from domain experts, innovation advisors, and experienced founders driving real-world outcomes.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💰</div>
+          <div>
+            <h4>Access to Capital</h4>
+            <p>Seamless entry into SIAN's syndicate networks, funding partners, and investor circles.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🌱</div>
+          <div>
+            <h4>Inclusive Growth</h4>
+            <p>Empowering startups from Tier-3 towns to deep tech labs through equitable support and opportunity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR INVESTORS -->
+<div class="full-bleed investors-bg" id="investors">
+  <div class="inner">
+    <div class="reveal">
+      <p class="section-label">For Investors</p>
+      <h2 class="section-title" style="color:var(--paper)">Invest With <em style="color:var(--gold)">Intention.</em><br>Scale With Insight.</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="investor-grid reveal">
+      <div class="investor-card">
+        <h3>Curated Deal Flow</h3>
+        <p>A pipeline of vetted, high-quality startups with validated traction and investor readiness.</p>
+      </div>
+      <div class="investor-card">
+        <h3>Syndication Opportunities</h3>
+        <p>Co-invest alongside experienced angels and syndicate leaders in strategic, high-growth ventures.</p>
+      </div>
+      <div class="investor-card">
+        <h3>Active Engagement</h3>
+        <p>Participate in pitch days, demo showcases, and closed-door founder sessions to stay ahead of market trends.</p>
+      </div>
+      <div class="investor-card">
+        <h3>Strategic Returns</h3>
+        <p>Leverage domain expertise and network synergies for portfolio diversification and value creation.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:3rem;">
+      <a href="https://forms.gle/MYPTTVVwDXGSdqL28" target="_blank" rel="noopener noreferrer" class="btn" style="border-color:var(--gold);color:var(--gold);">Join as Investor</a>
+    </div>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="reveal">
+    <p class="section-label">Events & Partnerships</p>
+    <h2 class="section-title">Where <em>Visionaries</em><br>and Capital Converge</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="events-list reveal">
+    <div class="event-item">
+      <p class="event-tag">Flagship Event</p>
+      <div>
+        <h3>SIAN Demo Day</h3>
+        <p>Flagship showcase connecting investors, innovators, and thought leaders around curated startup pitches.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <p class="event-tag">Dialogue Platform</p>
+      <div>
+        <h3>Founders Forum</h3>
+        <p>A closed-door dialogue platform for founders and ecosystem leaders to exchange insights and forge partnerships.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <p class="event-tag">Ecosystem</p>
+      <div>
+        <h3>Collaborative Ecosystem</h3>
+        <p>Partnerships with incubators, accelerators, government missions, and CSR initiatives to amplify impact.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <p class="event-tag">Visibility</p>
+      <div>
+        <h3>Market Visibility</h3>
+        <p>Curated events that catalyse opportunity, recognition, and cross-sector deal flow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <p class="section-label" style="justify-content:center;display:flex;">Get In Touch</p>
+      <h2 class="section-title" style="color:var(--paper);text-align:center;">Let's Build the<br><em style="color:var(--gold)">Future</em> Together</h2>
+      <div class="divider" style="margin: 2rem auto;"></div>
+      <p class="contact-tagline">Whether you're a founder seeking funding, an investor looking for curated deal flow, or an ecosystem partner ready to collaborate — SIAN is your gateway to South India's most ambitious innovation community.</p>
+    </div>
+    <div class="contact-details reveal">
+      <div class="contact-block">
+        <h4>Head Office</h4>
+        <p>SIAN Angels and Innovation Hub Pvt. Ltd.</p>
+        <p>#154, III Floor, Pothraj Group, Trinity Pothraj,</p>
+        <p>Trinity Circle, Old Madras Road,</p>
+        <p>Bengaluru 560008, India</p>
+      </div>
+      <div class="contact-block">
+        <h4>Reach Out</h4>
+        <a href="mailto:letstalk@sianangelnetwork.in">letstalk@sianangelnetwork.in</a>
+      </div>
+    </div>
+    <a href="mailto:letstalk@sianangelnetwork.in" class="btn reveal">Start a Conversation</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 SIAN Angels and Innovation Hub Pvt. Ltd. All rights reserved.</p>
+  <p>Bengaluru, India</p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
